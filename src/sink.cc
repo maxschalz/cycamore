@@ -186,11 +186,15 @@ void Sink::Tock() {
   // On the tock, the sink facility doesn't really do much.
   // Maybe someday it will record things.
   // For now, lets just print out what we have at each timestep.
+  double total_material = inventory.quantity();
   LOG(cyclus::LEV_INFO4, "SnkFac") << "Sink " << this->id()
-                                   << " is holding " << inventory.quantity()
+                                   << " is holding " << total_material
                                    << " units of material at the close of month "
                                    << context()->time() << ".";
   LOG(cyclus::LEV_INFO3, "SnkFac") << "}";
+  std::stringstream ss;
+  ss << prototype() << "TotalMat";
+  cyclus::toolkit::RecordTimeSeries<double>(ss.str(), this, total_material);
 }
 
 void Sink::RecordPosition() {
