@@ -192,9 +192,8 @@ void Sink::Tock() {
                                    << " units of material at the close of month "
                                    << context()->time() << ".";
   LOG(cyclus::LEV_INFO3, "SnkFac") << "}";
-  std::stringstream ss;
-  ss << prototype() << "TotalMat";
-  cyclus::toolkit::RecordTimeSeries<double>(ss.str(), this, total_material);
+  cyclus::toolkit::RecordTimeSeries<double>("SinkTotalMats", this,
+                                            total_material);
 }
 
 void Sink::RecordPosition() {
