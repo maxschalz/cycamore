@@ -91,6 +91,9 @@ Enrichment::GetMatlRequests() {
   if (amt > cyclus::eps_rsrc()) {
     port->AddRequest(mat, this, feed_commod);
     ports.insert(port);
+    LOG(cyclus::LEV_INFO4, "EnrFac") << prototype() << " added a request for "
+                                     << amt << " units of "
+                                     << feed_commod << ".";
   }
 
   return ports;

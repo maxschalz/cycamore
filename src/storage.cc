@@ -118,19 +118,13 @@ void Storage::Tick() {
   // Set available capacity for Buy Policy
   inventory.capacity(current_capacity());
 
-  LOG(cyclus::LEV_INFO3, "ComCnv") << prototype() << " is ticking {";
-
-  if (current_capacity() > cyclus::eps_rsrc()) {
-    LOG(cyclus::LEV_INFO4, "ComCnv")
-        << " has capacity for " << current_capacity() << " kg of material.";
-  }
-  LOG(cyclus::LEV_INFO3, "ComCnv") << "}";
+  LOG(cyclus::LEV_INFO3, "ComCnv") << prototype() << " has capacity for "
+                                   << current_capacity() << " kg of material.";
 }
 
 //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void Storage::Tock() {
   using cyclus::toolkit::RecordTimeSeries;
-  LOG(cyclus::LEV_INFO3, "ComCnv") << prototype() << " is tocking {";
 
   BeginProcessing_();  // place unprocessed inventory into processing
 
@@ -150,7 +144,6 @@ void Storage::Tock() {
   // provide one value for out_commods, despite it being a vector of strings.
   cyclus::toolkit::RecordTimeSeries<double>("supply"+out_commods[0], this,
                                             stocks.quantity());
-  LOG(cyclus::LEV_INFO3, "ComCnv") << "}";
 }
 
 //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
